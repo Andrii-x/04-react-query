@@ -26,6 +26,7 @@ function App() {
     placeholderData: (previousData) => previousData,
   })
   const handleSearch = (nextQuery: string) => { setQuery(nextQuery); setPage(1) }
+  const handlePageChange = ({ selected }: { selected: number }) => setPage(selected + 1)
   const errorMessage = isError && error instanceof Error ? error.message : 'Не вдалося завантажити фільми.'
 
   return (
@@ -46,7 +47,7 @@ function App() {
           {query && token && <p className={css.resultLabel}>Результати для «{query}»</p>}
           {isError && <ErrorMessage message={errorMessage} />}
           <MovieGrid movies={data?.results ?? []} isLoading={isLoading} hasQuery={Boolean(query && token)} onSelect={setSelectedMovie} />
-          {data && data.total_pages > 1 && <ReactPaginate pageCount={Math.min(data.total_pages, 500)} pageRangeDisplayed={5} marginPagesDisplayed={1} onPageChange={({ selected }) => setPage(selected + 1)} forcePage={page - 1} containerClassName={css.pagination} activeClassName={css.active} nextLabel="→" previousLabel="←" />}
+          {data && data.total_pages > 1 && <ReactPaginate pageCount={Math.min(data.total_pages, 500)} pageRangeDisplayed={5} marginPagesDisplayed={1} onPageChange={handlePageChange} forcePage={page - 1} containerClassName={css.pagination} activeClassName={css.active} nextLabel="→" previousLabel="←" />}
         </section>
       </main>
       {selectedMovie && <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />}

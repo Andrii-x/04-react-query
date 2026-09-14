@@ -1,0 +1,2 @@
+.error { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; padding: 16px 18px; border-left: 3px solid #dd5138; background: #ebe8e1; color: #a33225; font: 14px/1.5 Arial, sans-serif; }
+.error strong { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }

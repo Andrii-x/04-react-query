@@ -4,6 +4,9 @@ import ReactPaginateModule from 'react-paginate'
 import type { ReactPaginateProps } from 'react-paginate'
 import type { ComponentType } from 'react'
 import { fetchMovies } from '../../services/movieService'
+import type { Movie } from '../../types/movie'
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import MovieModal from '../MovieModal/MovieModal'
 import SearchBar from '../SearchBar/SearchBar'
 import MovieGrid from '../MovieGrid/MovieGrid'
 import css from './App.module.css'
@@ -14,6 +17,7 @@ const ReactPaginate = (ReactPaginateModule as unknown as ModuleWithDefault<Compo
 function App() {
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null)
   const token = import.meta.env.VITE_TMDB_TOKEN
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['movies', query, page],
@@ -40,11 +44,12 @@ function App() {
         <section className={css.results} aria-live="polite">
           {!token && <div className={css.notice}>Додайте токен TMDB у змінну <code>VITE_TMDB_TOKEN</code>, щоб активувати пошук.</div>}
           {query && token && <p className={css.resultLabel}>Результати для «{query}»</p>}
-          {isError && <p className={css.error}>{errorMessage}</p>}
-          <MovieGrid movies={data?.results ?? []} isLoading={isLoading} hasQuery={Boolean(query && token)} />
+          {isError && <ErrorMessage message={errorMessage} />}
+          <MovieGrid movies={data?.results ?? []} isLoading={isLoading} hasQuery={Boolean(query && token)} onSelect={setSelectedMovie} />
           {data && data.total_pages > 1 && <ReactPaginate pageCount={Math.min(data.total_pages, 500)} pageRangeDisplayed={5} marginPagesDisplayed={1} onPageChange={({ selected }) => setPage(selected + 1)} forcePage={page - 1} containerClassName={css.pagination} activeClassName={css.active} nextLabel="→" previousLabel="←" />}
         </section>
       </main>
+      {selectedMovie && <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />}
       <footer className={css.footer}>Cinefind <span>·</span> Добре кіно поруч</footer>
     </div>
   )

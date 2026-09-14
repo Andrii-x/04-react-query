@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import toast, { Toaster } from 'react-hot-toast'
 import ReactPaginateModule from 'react-paginate'
 import type { ReactPaginateProps } from 'react-paginate'
 import type { ComponentType } from 'react'
@@ -29,6 +30,10 @@ function App() {
   const handlePageChange = ({ selected }: { selected: number }) => setPage(selected + 1)
   const errorMessage = isError && error instanceof Error ? error.message : 'Не вдалося завантажити фільми.'
 
+  useEffect(() => {
+    if (data && query && data.results.length === 0) toast('За цим запитом фільмів не знайдено.')
+  }, [data, query])
+
   return (
     <div className={css.app}>
       <header className={css.header}>
@@ -40,7 +45,7 @@ function App() {
           <p className={css.eyebrow}>Кінокаталог / 01</p>
           <h1>Знайдіть фільм,<br /><em>який залишиться.</em></h1>
           <p className={css.intro}>Пошук серед тисяч історій, акторів і світів. Введіть назву, щоб почати.</p>
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar onSubmit={handleSearch} />
         </section>
         <section className={css.results} aria-live="polite">
           {!token && <div className={css.notice}>Додайте токен TMDB у змінну <code>VITE_TMDB_TOKEN</code>, щоб активувати пошук.</div>}
@@ -52,6 +57,7 @@ function App() {
       </main>
       {selectedMovie && <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />}
       <footer className={css.footer}>Cinefind <span>·</span> Добре кіно поруч</footer>
+      <Toaster position="top-right" />
     </div>
   )
 }

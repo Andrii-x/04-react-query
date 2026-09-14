@@ -9,9 +9,14 @@ const posterBaseUrl = 'https://image.tmdb.org/t/p/w500'
 
 function MovieModal({ movie, onClose }: MovieModalProps) {
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow
     const handleKeyDown = (event: globalThis.KeyboardEvent) => { if (event.key === 'Escape') onClose() }
+    document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [onClose])
 
   const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => { if (event.target === event.currentTarget) onClose() }

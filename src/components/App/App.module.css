@@ -1,0 +1,22 @@
+.app { min-height: 100vh; background: #f5f3ef; color: #17221f; }
+.header { display: flex; justify-content: space-between; align-items: center; max-width: 1180px; margin: 0 auto; padding: 28px 32px; border-bottom: 1px solid #d8d5cc; }
+.brand { display: flex; align-items: center; gap: 10px; color: #17221f; font: 700 20px/1 Georgia, serif; }
+.brandMark { display: grid; place-items: center; width: 31px; height: 31px; background: #dd5138; color: #fff; font: 700 11px/1 Arial, sans-serif; letter-spacing: 1px; }
+.headerNote { color: #737a73; font: 12px/1.4 Arial, sans-serif; letter-spacing: .04em; }
+.hero { max-width: 1180px; margin: 0 auto; padding: 86px 32px 76px; border-bottom: 1px solid #d8d5cc; }
+.eyebrow, .resultLabel { color: #dd5138; font: 700 11px/1.4 Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.hero h1 { max-width: 760px; margin: 19px 0 18px; color: #17221f; font: 400 clamp(48px, 8vw, 104px)/.92 Georgia, serif; letter-spacing: -.045em; }
+.hero h1 em { color: #dd5138; font-style: italic; }
+.intro { max-width: 420px; margin: 0 0 40px; color: #737a73; font: 16px/1.6 Arial, sans-serif; }
+.results { max-width: 1180px; margin: 0 auto; padding: 34px 32px 70px; }
+.resultLabel { margin: 0 0 22px; color: #737a73; letter-spacing: .1em; }
+.notice, .error { padding: 16px 18px; border-left: 3px solid #dd5138; background: #ebe8e1; color: #59615b; font: 14px/1.5 Arial, sans-serif; }
+.error { margin-bottom: 20px; color: #a33225; }
+.notice code { color: #dd5138; font-family: Consolas, monospace; }
+.pagination { display: flex; justify-content: center; gap: 6px; margin: 42px 0 16px; padding: 0; list-style: none; font: 14px Arial, sans-serif; }
+.pagination li { width: 40px; height: 40px; border: 1px solid #ccc8bd; cursor: pointer; border-radius: 0; }
+.pagination a { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.active { background-color: #17221f; color: white; font-weight: bold; }
+.footer { max-width: 1180px; margin: auto; padding: 22px 32px 36px; color: #92958d; font: 12px Arial, sans-serif; }
+.footer span { padding: 0 8px; color: #dd5138; }
+@media (max-width: 640px) { .header, .hero, .results, .footer { padding-left: 20px; padding-right: 20px; } .headerNote { display: none; } .hero { padding-top: 58px; padding-bottom: 54px; } }

@@ -1,0 +1,4 @@
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px 18px; }
+.status, .empty { padding: 50px 0; color: #737a73; font: 16px/1.5 Georgia, serif; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 620px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 22px 12px; } }

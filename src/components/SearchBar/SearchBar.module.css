@@ -1,0 +1,7 @@
+.form { display: flex; max-width: 590px; border-bottom: 2px solid #17221f; }
+.label { flex: 1; }
+.form input { width: 100%; padding: 15px 0; border: 0; outline: 0; background: transparent; color: #17221f; font: 18px Georgia, serif; }
+.form input::placeholder { color: #a0a39b; }
+.form button { padding: 0 0 0 24px; border: 0; background: transparent; color: #dd5138; cursor: pointer; font: 700 12px Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.form button span { padding-left: 8px; font-size: 20px; }
+.visuallyHidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
